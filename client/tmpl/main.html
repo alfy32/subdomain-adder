@@ -1,0 +1,50 @@
+<div id="main">
+  <div ng-show="needsRefreshed" class="alert">Subdomains are out of date and need refreshed!</div>
+
+  <div id="alerts">
+    <div alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index, alert)">{{alert.msg}}</div>
+  </div>
+
+  <div class="btn pull-right" ng-click="logout()">logout</div>
+  <h1>Subdomain Manager</h1>
+
+  <div ng-repeat="grp in subs">
+    <h3>{{grp[0].domain}}</h3>
+    <table class="table">
+      <tr>
+        <th>Subdomain</th>
+        <th>Host</th>
+        <th>Modify</th>
+        <th>Delete</th>
+      </tr>
+      <tr ng-repeat="sub in grp">
+        <td>{{sub.sub}}</td>
+        <td>{{sub.host}}</td>
+        <td><button class="btn" ng-click="openModal('Update', sub, $index)">Modify</button></td>
+        <td><button class="btn btn-danger" ng-click="deleteSubdomain(sub, $index)">Delete</button></td>
+      </tr>
+    </table>
+    <button class="btn btn-success" ng-click="openModal('Add')">Add</button>
+    <button class="btn btn-info" ng-click="refresh()" ng-show="canRefresh()">Refresh</button>
+  </div>
+</div>
+
+<div modal="showModal" options="modalOpts" close="closeModal()">
+  <div class="modal-header">
+    <h3>{{mTitle}} - <span ng-show="obj.sub">{{obj.sub}}.</span>{{obj.domain}}</h3>
+  </div>
+
+  <div class="modal-body">
+    <label>Domain</label>
+    <select ng-model="obj.domain" ng-options="d for d in domains"></select>
+    <label>Subdomain</label>
+    <input type="text" ng-model="obj.sub">
+    <label>Host</label>
+    <input type="text" ng-model="obj.host">
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn" ng-click="closeModal()">Cancel</button>
+    <button class="btn btn-success" ng-click="updateSubdomain(obj, mTitle=='Update')">{{mTitle}}</button>
+  </div>
+</div>
