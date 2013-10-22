@@ -1,18 +1,4 @@
-Boilerplate for an Angular App
-===
+Subdomain Adder
+===============
 
-##Installation
-
-From the command line run `npm install` and `npm install grunt-cli -g`
-
-##Running the App
-
-Run `npm startt`
-
-##Running the App in Production Mode
-
-Run `grunt build` and `export NODE_ENV=production` then `npm start`
-
-##Grunt Commands
-
-This app uses grunt, the following commands are available: `grunt hint`, `grunt build`, `grunt clean`
+A little tool I made for my site. It's hosted at add.dallinosmun.com. I've routed *.dallinosmun.com to my site and use vhosts to forward to different servers (see my proxy-vhost project). This little app lets me add new subdomains on the fly.
