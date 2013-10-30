@@ -128,10 +128,11 @@ function deleteSub(req, res) {
   var rev = req.params.rev;
 
   request({
-    url: couchUrl + id + '?rev=' + rev,
+    url: couchUrl + '/' + id + '?rev=' + rev,
     method: 'DELETE'
   }, function (err, resp, data) {
     if (err) return _fail(res, err);
+    data = JSON.parse(data);
     if (data.error) return _fail(res, data);
 
     needsRefreshed = true;
