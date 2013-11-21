@@ -12,6 +12,7 @@ module.exports = function (app) {
   app.post('/login', login);
   app.get('/logout', logout);
   app.get('/user', app.mw.loggedIn, user);
+  // app.get('/makePass', makePassword);
 };
 
 function login(req, res) {
@@ -61,6 +62,13 @@ function user(req, res) {
     user: req.session.user
   });
 }
+
+// function makePassword(req, res) {
+//   if(!req.query.pass) 
+//     return _fail(res, "You must provide a password.");
+
+//   res.send('<h3>Your generated password: ' + passwordHash.generate(req.query.pass) + "</h3>");
+// }
 
 function _fail(res, err) {
   res.send({
